@@ -177,3 +177,13 @@ checkpoint.restore(tf.train.latest_checkpoint(checkpoint_dir))
 def display_image(epoch_no):
     return PIL.Image.open('image_at_epoch_{:04d}.png'.format(epoch_no))
 display_image(EPOCHS)
+
+anim_file = 'dcgan.gif'
+with imageio.get_writer(anim_file, mode='I') as writer:
+    filenames = glob.glob('image*.png')
+    filenames = sorted(filenames)
+    for filename in filenames:
+        image = imageio.imread(filename)
+        writer.append_data(image)
+    image = imageio.imread(filename)
+    writer.append_data(image)
